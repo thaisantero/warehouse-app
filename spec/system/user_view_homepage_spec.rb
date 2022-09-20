@@ -14,8 +14,8 @@ describe 'Usuário visita tela inicial' do
   it 'e vê os galpoes cadastrados' do
     # Arrange
     # cadastrar dois galpoes: Rio e MAceio
-    Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: '60_000')
-    Warehouse.create(name: 'Maceio', code: 'MCZ', city: 'Maceio', area: '50_000')
+    Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: '60_000', address: 'Av Atlantica, 10', cep: '20000-000', description: 'Galpao do Rio')
+    Warehouse.create(name: 'Maceio', code: 'MCZ', city: 'Maceio', area: '50_000', address: 'Av do Aeroporto, 20', cep: '80000-000', description: 'Galpao de Maceio')
     
     # Act
     visit('/')
