@@ -12,7 +12,7 @@ class WarehousesController < ApplicationController
     :area, :code, :address, :cep, :description)
     @warehouse = Warehouse.new(warehouse_params)
     @warehouse.save
-    
+
     if @warehouse.save
       flash[:notice] = 'Galpão cadastrado com sucesso.'
       redirect_to root_path
