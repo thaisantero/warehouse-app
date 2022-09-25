@@ -12,11 +12,11 @@ describe 'Usuário vê fornecedores' do
 
   it 'com sucesso' do
     Supplier.create!(
-      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '123435678',
+      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
     Supplier.create!(
-      corporate_name: 'Spark Industries Brasil', brand_name: 'Spark', registration_number: '34567891',
+      corporate_name: 'Spark Industries Brasil', brand_name: 'Spark', registration_number: '12345678000140',
       full_address: 'Terra da Indústria, 12', city: 'Teresina', state: 'PI', email: 'contato_spark@gmail.com'
     )
 

@@ -6,7 +6,7 @@ describe 'Usuário vê detalhes de um fornecedor' do
   it 'e vê informações adicionais' do
     # Arrange
     Supplier.create!(
-      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '123435678',
+      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
     # Act
@@ -16,7 +16,7 @@ describe 'Usuário vê detalhes de um fornecedor' do
 
     # Assert
     expect(page).to have_content('ACME LTDA')
-    expect(page).to have_content('Documento: 123435678')
+    expect(page).to have_content('Documento: 12.345.678/0001-50')
     expect(page).to have_content('Endereço: Av das Palmas, 100 - Bauru - SP')
     expect(page).to have_content('E-mail: contato@gmail.com')
   end
@@ -24,7 +24,7 @@ describe 'Usuário vê detalhes de um fornecedor' do
   it 'e volta para a tela inicial' do
     # Arrange
     Supplier.create!(
-      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '123435678',
+      corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
     # Act

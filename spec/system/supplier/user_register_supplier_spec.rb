@@ -44,4 +44,23 @@ describe 'Usuário cadastra fornecedor' do
     expect(page).to have_content('Bauru')
     expect(page).to have_content('SP')
   end
+
+  it 'com dados incompletos' do
+    # Arrange
+
+    # Act
+    visit root_path
+    click_on 'Fornecedores'
+    click_on 'Cadastrar novo fornecedor'
+    fill_in 'Nome Fantasia', with: ''
+    fill_in 'Razão Social', with: ''
+    fill_in 'CNPJ', with: ''
+    click_on 'Enviar'
+
+    # Assert
+    expect(page).to have_content('Fornecedor não cadastrado.')
+    expect(page).to have_content('Nome Fantasia não pode ficar em branco')
+    expect(page).to have_content('Razão Social não pode ficar em branco')
+    expect(page).to have_content('CNPJ não pode ficar em branco')
+  end
 end
