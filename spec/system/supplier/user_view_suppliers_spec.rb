@@ -22,4 +22,11 @@ describe 'Usuário vê fornecedores' do
     expect(page).to have_content 'Spark'
     expect(page).to have_content 'Teresina'
   end
+
+  it 'e não existem fornecedores cadastrados' do
+    visit root_path
+    click_on 'Fornecedores'
+
+    expect(page).to have_content('Não existem fornecedores cadastrados')
+  end
 end
