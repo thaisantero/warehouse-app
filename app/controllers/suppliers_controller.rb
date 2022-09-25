@@ -7,6 +7,22 @@ class SuppliersController < ApplicationController
   def show
   end
 
+  def new
+    @supplier = Supplier.new
+  end
+
+  def create
+    @supplier = Supplier.new(supplier_params)
+
+    if @supplier.save
+      flash[:notice] = 'Fornecedor cadastrado com sucesso.'
+      redirect_to suppliers_path
+    else
+      flash.now[:notice] = 'Fornecedor não cadastrado.'
+      render 'new'
+    end
+  end
+
   private
   def set_supplier
     @supplier = Supplier.find(params[:id])
