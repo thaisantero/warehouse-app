@@ -1,9 +1,14 @@
-
+<section id='suppliers'>
+  <div>
+    <%= link_to 'Fornecedores', suppliers_path %>
+  </div>
+</section>
 <section id='warehouses'>
   <h2> Galpões </h2>
   <div>
     <%= link_to 'Cadastrar Galpão', new_warehouse_path %>
   </div>
+
   <% @warehouses.each do | warehouse | %>
     <div>
       <h3><%= link_to warehouse.name, warehouse_path(warehouse.id) %> </h3>

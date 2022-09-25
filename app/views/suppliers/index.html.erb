@@ -1,0 +1,17 @@
+<h2> Fornecedores </h2>
+  <% @suppliers.each do | supplier | %>
+    <div>
+      <dl>
+        <dt> Nome da Empresa:  </dt>
+        <dd> <%= supplier.corporate_name %> </dd>
+        <dt> Número de Registro: </dt>
+        <dd> <%= supplier.registration_number %></dd>
+        <dt> Cidade: </dt>
+        <dd> <%= supplier.city %></dd>
+      </dl>
+    </div>
+  <% end %>
+
+<% if @suppliers.empty?%>
+  <p> Não existem fornecedores cadastrados </p>
+<% end %>
