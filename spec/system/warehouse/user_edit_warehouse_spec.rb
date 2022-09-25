@@ -47,7 +47,7 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_content('CEP: 16000-000')
   end
 
-  it 'e mantém os campos obrig óbrigatórios' do
+  it 'e mantém os campos obrigatórios' do
     Warehouse.create!(
       name: 'Aeroporto de SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
       address: 'Avenida do Aeroporto, 1000', cep: '15000000',

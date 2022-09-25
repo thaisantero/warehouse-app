@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: [:show]
+  before_action :set_supplier, only: [:show, :edit, :update]
   def index
     @suppliers = Supplier.all
   end
@@ -21,6 +21,19 @@ class SuppliersController < ApplicationController
     else
       flash.now[:notice] = 'Fornecedor não cadastrado.'
       render 'new'
+    end
+  end
+
+  def edit; end
+
+  def update
+
+    if @supplier.update(supplier_params)
+      flash[:notice] = 'Fornecedor atualizado com sucesso.'
+      redirect_to supplier_path(@supplier.id)
+    else
+      flash.now[:notice] = 'Não foi possível atualizar o fornecedor.'
+      render 'edit'
     end
   end
 
