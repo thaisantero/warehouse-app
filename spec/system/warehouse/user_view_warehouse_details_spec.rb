@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Usuário ve detalhes de um galpao' do
-
   it 'e vê informações adicionais' do
     # Arrange
     Warehouse.create!(

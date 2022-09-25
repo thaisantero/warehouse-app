@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class WarehousesController < ApplicationController
-  before_action :set_warehouse, only: [:show, :edit, :update, :destroy]
-  
-  def show
-  end
+  before_action :set_warehouse, only: %i[show edit update destroy]
+
+  def show; end
 
   def new
     @warehouse = Warehouse.new
@@ -20,8 +21,7 @@ class WarehousesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @warehouse.update(warehouse_params)
@@ -42,12 +42,13 @@ class WarehousesController < ApplicationController
   end
 
   private
+
   def set_warehouse
     @warehouse = Warehouse.find(params[:id])
   end
 
   def warehouse_params
     params.require(:warehouse).permit(:name, :city,
-      :area, :code, :address, :cep, :description)
+                                      :area, :code, :address, :cep, :description)
   end
 end
