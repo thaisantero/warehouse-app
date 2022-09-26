@@ -1,0 +1,18 @@
+<h1>Modelos de Produtos</h1>
+
+<% if @product_models.any? %>
+  <% @product_models.each do | product_model | %>
+    <div>
+      <h3><%= product_model.name %> </h3>
+      <dl>
+        <dt> SKU:  </dt>
+        <dd> <%= product_model.sku %> </dd>
+        <dt> Fornecedor: </dt>
+        <dd> <%= product_model.supplier.brand_name %></dd>
+      </dl>
+    </div>
+  <% end %>
+
+<% else %>
+  <p>Não existem produtos cadastrados</p>
+<% end %>
