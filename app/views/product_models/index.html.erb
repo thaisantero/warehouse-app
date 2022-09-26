@@ -1,5 +1,9 @@
 <h1>Modelos de Produtos</h1>
 
+<div>
+  <%= link_to 'Cadastrar Novo', new_product_model_path %>
+</div>
+
 <% if @product_models.any? %>
   <% @product_models.each do | product_model | %>
     <div>
