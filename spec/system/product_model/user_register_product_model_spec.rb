@@ -1,10 +1,14 @@
 require 'rails_helper'
 
-describe 'Usuário cadastra um modelo de de produto' do
+describe 'Usuário cadastra um modelo de produto' do
   it 'com sucesso' do
-    supplier = Supplier.create!(
+    Supplier.create!(
       brand_name: 'SAMSUNG', corporate_name: 'SAMSUNG LTDA', registration_number: '22222333000150',
       full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br'
+    )
+    Supplier.create!(
+      brand_name: 'LG', corporate_name: 'LG LTDA', registration_number: '12345333000150',
+      full_address: 'Av Ibirapuera, 3000', city: 'São Paulo', state: 'SP', email: 'sac@lg.com.br'
     )
 
     visit root_path
@@ -25,5 +29,22 @@ describe 'Usuário cadastra um modelo de de produto' do
     expect(page).to have_content('SKU: TV32-SAMSU-XPT090')
     expect(page).to have_content('Peso: 8000g')
     expect(page).to have_content('Fornecedor: SAMSUNG')
+  end
+
+  it 'com campos imcompletos' do
+    Supplier.create!(
+      brand_name: 'SAMSUNG', corporate_name: 'SAMSUNG LTDA', registration_number: '22222333000150',
+      full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br'
+    )
+
+    visit root_path
+    click_on 'Modelos de Produtos'
+    click_on 'Cadastrar Novo'
+    fill_in 'Nome', with: ''
+    fill_in 'Peso', with: ''
+    fill_in 'SKU', with: ''
+    click_on 'Enviar'
+
+    expect(page).to have_content('Não foi possível cadastrar o modelo de produto.')
   end
 end
