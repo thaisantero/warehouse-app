@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class SuppliersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create, :show, :edit, :update]
   before_action :set_supplier, only: [:show, :edit, :update]
   def index
     @suppliers = Supplier.all
   end
 
-  def show; end
+  def show
+    @product_models = @supplier.product_models
+
+  end
 
   def new
     @supplier = Supplier.new

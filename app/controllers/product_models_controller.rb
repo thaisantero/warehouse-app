@@ -1,4 +1,5 @@
 class ProductModelsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create, :show]
   def index
     @product_models = ProductModel.all
   end

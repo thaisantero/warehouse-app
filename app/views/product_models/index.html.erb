@@ -7,7 +7,7 @@
 <% if @product_models.any? %>
   <% @product_models.each do | product_model | %>
     <div>
-      <h3><%= product_model.name %> </h3>
+      <h3><%= link_to product_model.name, product_model %> </h3>
       <dl>
         <dt> SKU:  </dt>
         <dd> <%= product_model.sku %> </dd>

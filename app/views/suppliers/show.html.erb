@@ -11,6 +11,19 @@
 </dl>
 
 <div>
+  <% if @product_models.any? %>
+    <% @product_models.each do | product_model | %>
+      <dt> Modelo: </dt>
+      <dd> <%= product_model.name%></dd>
+      <dt> SKU:  </dt>
+      <dd> <%= product_model.sku %> </dd>
+    <% end %>
+  <% else %>
+    <p>Não existe modelo de produto cadastrado</p>
+  <% end %>
+</div>
+
+<div>
 <%= link_to 'Editar', edit_supplier_path(@supplier.id)%>
 </div>
 

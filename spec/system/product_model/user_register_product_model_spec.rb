@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário cadastra um modelo de produto' do
   it 'com sucesso' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
     Supplier.create!(
       brand_name: 'SAMSUNG', corporate_name: 'SAMSUNG LTDA', registration_number: '22222333000150',
       full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br'
@@ -11,6 +12,7 @@ describe 'Usuário cadastra um modelo de produto' do
       full_address: 'Av Ibirapuera, 3000', city: 'São Paulo', state: 'SP', email: 'sac@lg.com.br'
     )
 
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'
@@ -32,11 +34,13 @@ describe 'Usuário cadastra um modelo de produto' do
   end
 
   it 'com campos imcompletos' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
     Supplier.create!(
       brand_name: 'SAMSUNG', corporate_name: 'SAMSUNG LTDA', registration_number: '22222333000150',
       full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br'
     )
 
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo'

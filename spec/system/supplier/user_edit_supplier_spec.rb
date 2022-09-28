@@ -4,11 +4,13 @@ require 'rails_helper'
 
 describe 'Usuário edita um fornecedor' do
   it 'a partir de uma página de detalhes' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
     Supplier.create!(
       corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
 
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -25,11 +27,13 @@ describe 'Usuário edita um fornecedor' do
   end
 
   it 'com sucesso' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
     Supplier.create!(
       corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
 
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -44,11 +48,13 @@ describe 'Usuário edita um fornecedor' do
   end
 
   it 'e mantém os campos obrigatórios' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
     Supplier.create!(
       corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '12345678000150',
       full_address: 'Av das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@gmail.com'
     )
 
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'

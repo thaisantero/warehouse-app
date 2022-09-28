@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class WarehousesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_warehouse, only: %i[show edit update destroy]
 
   def show; end
