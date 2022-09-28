@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
   root 'home#index'
   resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :suppliers, only: [:index, :show, :new, :create, :edit, :update]
