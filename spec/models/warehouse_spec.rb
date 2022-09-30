@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Warehouse, type: :model do
-  describe 'válido?' do
+  describe '#valid?' do
     context 'presença' do
       it 'falso quando nome está vazio' do
         warehouse = Warehouse.new(name: '', code: 'RIO', address: 'Endereço',
@@ -91,6 +91,16 @@ RSpec.describe Warehouse, type: :model do
 
         expect(warehouse).not_to be_valid
       end
+    end
+  end
+
+  describe '#full_description' do
+    it 'exibe o nome e o código' do
+      w = Warehouse.new(name: 'Galpão Cuiabá', code: 'CBA')
+
+      result = w.full_description
+
+      expect(result).to eq 'CBA - Galpão Cuiabá'
     end
   end
 end
