@@ -47,4 +47,29 @@ describe 'Usuário cadastra um pedido' do
     expect(page).not_to have_content 'Galpão Rio'
     expect(page).not_to have_content 'SAMSUNG LTDA'
   end
+
+  it 'e não informa a data de entrega' do
+    user = User.create!(name: 'João', email: 'joao@gmail.com', password: 'password')
+    supplier = Supplier.create!(
+      brand_name: 'LG', corporate_name: 'LG LTDA', registration_number: '12345333000150',
+      full_address: 'Av Ibirapuera, 3000', city: 'São Paulo', state: 'SP', email: 'sac@lg.com.br'
+    )
+    warehouse = Warehouse.create(
+      name: 'Galpão Maceio', code: 'MCZ', city: 'Maceio', area: '50_000',
+      address: 'Av do Aeroporto, 20',
+      cep: '80000000', description: 'Galpao de Maceio'
+    )
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC1234567')
+
+    login_as(user)
+    visit root_path
+    click_on 'Registrar Pedido'
+    select 'MCZ - Galpão Maceio', from: 'Galpão Destino'
+    select supplier.corporate_name, from: 'Fornecedor'
+    fill_in 'Data Prevista de Entrega', with: ''
+    click_on 'Gravar'
+
+    expect(page).to have_content 'Não foi possível registrar o pedido.'
+    expect(page).to have_content 'Data Prevista de Entrega não pode ficar em branco'
+  end
 end
