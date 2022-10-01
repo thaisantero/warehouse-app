@@ -28,6 +28,7 @@ describe 'Usuário cadastra um pedido' do
       address: 'Av do Aeroporto, 20',
       cep: '80000000', description: 'Galpao de Maceio'
     )
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABC1234567')
 
     login_as(user)
     visit root_path
@@ -38,6 +39,7 @@ describe 'Usuário cadastra um pedido' do
     click_on 'Gravar'
 
     expect(page).to have_content 'Pedido registrado com sucesso.'
+    expect(page).to have_content 'Pedido ABC1234567'
     expect(page).to have_content 'Galpão Destino: MCZ - Galpão Maceio'
     expect(page).to have_content 'Fornecedor: LG LTDA'
     expect(page).to have_content 'Data Prevista de Entrega: 20/12/2022'
