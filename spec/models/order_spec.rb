@@ -15,7 +15,7 @@ RSpec.describe Order, type: :model do
         address: 'Av Atlantica, 10',
         cep: '20000000', description: 'Galpao do Rio'
       )
-      order = Order.new(user: user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: '2022-10-02')
+      order = Order.new(user: user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: 2.day.from_now)
 
       result = order.valid?
 
@@ -72,7 +72,7 @@ RSpec.describe Order, type: :model do
         address: 'Av Atlantica, 10',
         cep: '20000000', description: 'Galpao do Rio'
       )
-      order = Order.new(user: user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: '2022-10-02')
+      order = Order.new(user: user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: 2.day.from_now)
 
       order.save!
       result = order.code
@@ -96,11 +96,11 @@ RSpec.describe Order, type: :model do
       )
       first_order = Order.create!(
         user: user, supplier: supplier,
-        warehouse: warehouse, estimated_delivery_date: '2022-10-02'
+        warehouse: warehouse, estimated_delivery_date: 2.day.from_now
       )
       second_order = Order.new(
         user: user, supplier: supplier,
-        warehouse: warehouse, estimated_delivery_date: '2022-10-02'
+        warehouse: warehouse, estimated_delivery_date: 2.day.from_now
       )
 
       second_order.save!

@@ -20,17 +20,23 @@ describe 'Usuário vê seus próprios pedidos' do
       address: 'Av Atlantica, 10',
       cep: '20000000', description: 'Galpao do Rio'
     )
-    first_order = Order.create!(user: first_user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: 2.day.from_now)
-    second_order = Order.create!(user: second_user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: 2.day.from_now)
-    third_order = Order.create!(user: first_user, supplier: supplier, warehouse: warehouse, estimated_delivery_date: 5.day.from_now)
+    first_order = Order.create!(user: first_user, supplier: supplier, 
+      warehouse: warehouse, estimated_delivery_date: 2.day.from_now, status: 'pending')
+    second_order = Order.create!(user: second_user, supplier: supplier, 
+      warehouse: warehouse, estimated_delivery_date: 2.day.from_now, status: 'delivered')
+    third_order = Order.create!(user: first_user, supplier: supplier, 
+      warehouse: warehouse, estimated_delivery_date: 5.day.from_now, status: 'canceled')
 
     login_as(first_user)
     visit root_path
     click_on 'Meus Pedidos'
 
     expect(page).to have_content(first_order.code)
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content(second_order.code)
+    expect(page).not_to have_content 'Entregue'
     expect(page).to have_content(third_order.code)
+    expect(page).to have_content 'Cancelado'
   end
 
   it 'e visita um pedido' do
