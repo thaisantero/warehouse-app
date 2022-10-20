@@ -4,7 +4,9 @@ class WarehousesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_warehouse, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @stocks = @warehouse.stock_products.group(:product_model).count
+  end
 
   def new
     @warehouse = Warehouse.new
