@@ -31,10 +31,41 @@ describe 'Usuário vê estoque' do
     visit root_path
     click_on 'Aeroporto de SP'
 
-    expect(page).to have_content 'Itens em Estoque'
-    expect(page).to have_content '3 x TV32-SAMSU-XPT090010'
-    expect(page).to have_content '2 x NOTE5-SAMSU-NOIZ7710'
-    expect(page).not_to have_content 'SOU71-SAMSU-NOIZ7710'
+    within('section#stock_products') do
+      expect(page).to have_content 'Itens em Estoque'
+      expect(page).to have_content '3 x TV32-SAMSU-XPT090010'
+      expect(page).to have_content '2 x NOTE5-SAMSU-NOIZ7710'
+      expect(page).not_to have_content 'SOU71-SAMSU-NOIZ7710'
+    end
   end
 
+  it 'e dá baixa em um item' do
+    user = User.create!(email: 'joao@gmail.com', password: 'password')
+    warehouse = Warehouse.create(name: 'Aeroporto de SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+      address: 'Avenida do Aeroporto, 1000', cep: '15000000',
+      description: 'Galpão destinado para cargas internacionais')
+    supplier = Supplier.create!(
+      brand_name: 'SAMSUNG', corporate_name: 'SAMSUNG LTDA', registration_number: '22222333000150',
+      full_address: 'Av Nações Unidas, 1000', city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br'
+      )
+    order = Order.create!(user: user, supplier: supplier,
+                          warehouse: warehouse, estimated_delivery_date: 2.day.from_now)
+    product_tv = ProductModel.create!(
+      name: 'TV 32', weight: 8000, width: 70, height: 45, depth: 10,
+      sku: 'TV32-SAMSU-XPT090010', supplier: supplier
+    )
+    2.times { StockProduct.create!(order: , warehouse:, product_model: product_tv) }
+
+    login_as(user)
+    visit root_path
+    click_on 'Aeroporto de SP'
+    select 'TV32-SAMSU-XPT090010', from: 'Item para Saída'
+    fill_in 'Destinatário', with: 'Maria Ferreira'
+    fill_in 'Endereço Destino', with: 'Rua da Palmeiras, 100 - Campinas - São Paulo'
+    click_on 'Confirmar Retirada'
+
+    expect(current_path).to eq warehouse_path(warehouse.id)
+    expect(page).to have_content 'Item retirado com sucesso'
+    expect(page).to have_content '1 x TV32-SAMSU-XPT090010'
+  end
 end
